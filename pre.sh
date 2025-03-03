@@ -410,6 +410,7 @@ if [[ $param_parttype == 'efi' ]]; then
         apt update && \
         apt install -y debootstrap && \
         debootstrap --arch ${param_arch} ${param_ubuntuversion} /target/root ${param_mirror} && \
+	if [ -f \"/etc/apt/sources.list.d/ubuntu.sources\" ]; then cp /etc/apt/sources.list.d/ubuntu.sources /target/root/etc/apt/sources.list.d/ubuntu.sources; fi && \
         if [ -z ${param_mirror} ]; then cp /etc/apt/sources.list /target/root/etc/apt/sources.list; fi && \
         if [ \"${PKG_REPO_SEC_LIST}\" != \"\" ]; then echo \"deb ${param_mirror} ${param_ubuntuversion}-security ${PKG_REPO_SEC_LIST}\" | cat - /target/root/etc/apt/sources.list > /tmp/out && mv /tmp/out /etc/apt/sources.list; fi && \
         if [ \"${PKG_REPO_LIST}\" != \"\" ]; then echo \"deb ${param_mirror} ${param_ubuntuversion} ${PKG_REPO_LIST}\" | cat - /target/root/etc/apt/sources.list > /tmp/out && mv /tmp/out /etc/apt/sources.list; fi && \
@@ -455,6 +456,7 @@ else
         apt update && \
         apt install -y debootstrap && \
         debootstrap --arch ${param_arch} ${param_ubuntuversion} /target/root ${param_mirror} && \
+	if [ -f \"/etc/apt/sources.list.d/ubuntu.sources\" ]; then cp /etc/apt/sources.list.d/ubuntu.sources /target/root/etc/apt/sources.list.d/ubuntu.sources; fi && \
         if [ -z ${param_mirror} ]; then cp /etc/apt/sources.list /target/root/etc/apt/sources.list; fi && \
         if [ \"${PKG_REPO_SEC_LIST}\" != \"\" ]; then echo \"deb ${param_mirror} ${param_ubuntuversion}-security ${PKG_REPO_SEC_LIST}\" | cat - /target/root/etc/apt/sources.list > /tmp/out && mv /tmp/out /etc/apt/sources.list; fi && \
         if [ \"${PKG_REPO_LIST}\" != \"\" ]; then echo \"deb ${param_mirror} ${param_ubuntuversion} ${PKG_REPO_LIST}\" | cat - /target/root/etc/apt/sources.list > /tmp/out && mv /tmp/out /etc/apt/sources.list; fi && \
